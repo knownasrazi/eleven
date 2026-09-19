@@ -74,6 +74,10 @@ const MIN_YT_SCORE = 0.18;
 const SP_TIMEOUT_MS = 10_000;
 const MIRROR_TIMEOUT_MS = 7_000;
 
+/**
+ * Races a promise against a timeout. The timer is cleared once either side
+ * settles, so finished searches don't leave dead timers behind.
+ */
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 	let timer: ReturnType<typeof setTimeout> | undefined;
 	const timeout = new Promise<T>((_, reject) => {
